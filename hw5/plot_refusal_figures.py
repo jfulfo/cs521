@@ -15,12 +15,10 @@ with open(f"{BASE_PATH}/harmless_actadd_evaluations.json") as f:
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-# Figure 1: Harmful prompts - baseline vs ablation
 ax1 = axes[0]
 x = np.arange(2)
 width = 0.35
 
-# For harmful: refusal = 1 - ASR, safety = 1 - unsafe_rate
 baseline_ref = 1 - harmful_baseline["substring_matching_success_rate"]
 baseline_safe = 1 - harmful_baseline["llamaguard2_success_rate"]
 ablation_ref = 1 - harmful_ablation["substring_matching_success_rate"]
@@ -41,8 +39,6 @@ for bar in bars1 + bars2:
     ax1.annotate(f'{h:.2f}', xy=(bar.get_x() + bar.get_width()/2, h),
                 xytext=(0, 3), textcoords="offset points", ha='center', va='bottom')
 
-# Figure 3: Harmless prompts - baseline vs activation addition
-# For harmless: success_rate = compliance, so refusal = 1 - success_rate
 ax2 = axes[1]
 x = np.arange(1)
 
@@ -66,10 +62,10 @@ for bar in bars1 + bars2:
 
 plt.tight_layout()
 plt.savefig('refusal_direction_figures.png', dpi=150)
-print("Saved refusal_direction_figures.png")
-print(f"\nFigure 1 - Harmful prompts (JailbreakBench):")
-print(f"  Baseline: refusal={baseline_ref:.2f}, safety={baseline_safe:.2f}")
-print(f"  Ablation: refusal={ablation_ref:.2f}, safety={ablation_safe:.2f}")
-print(f"\nFigure 3 - Harmless prompts:")
-print(f"  Baseline refusal: {baseline_ref_harmless:.2f}")
-print(f"  ActAdd refusal:   {actadd_ref_harmless:.2f}")
+print("saved refusal_direction_figures.png")
+print(f"\nfigure 1 - harmful prompts (JailbreakBench):")
+print(f"  baseline: refusal={baseline_ref:.2f}, safety={baseline_safe:.2f}")
+print(f"  ablation: refusal={ablation_ref:.2f}, safety={ablation_safe:.2f}")
+print(f"\nfigure 3 - harmless prompts:")
+print(f"  baseline refusal: {baseline_ref_harmless:.2f}")
+print(f"  actadd refusal:   {actadd_ref_harmless:.2f}")
